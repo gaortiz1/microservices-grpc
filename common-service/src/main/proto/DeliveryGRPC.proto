@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package com.microservice.application.service.delivery.grpc;
+
+enum DeliveryStatus {
+  RELEASED = 0;
+  CANCELED = 1;
+}
+
+message DeliveryResponse {
+  int32 id = 1;
+  int32 orderId = 2;
+  int32 paymentId = 3;
+  string address = 4;
+  DeliveryStatus status = 5;
+}
+
+message CreateDeliveryRequest {
+  string address = 1;
+  int32 orderId = 2;
+  int32 paymentId = 3;
+}
+
+service DeliveryService {
+
+  rpc createDelivery (CreateDeliveryRequest) returns (DeliveryResponse) {}
+}

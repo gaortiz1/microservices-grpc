@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package com.microservice.application.service.payment.grpc;
+
+enum PaymentStatus {
+  REFUNDED = 0;
+  PROCESS = 1;
+}
+
+message PaymentResponse {
+  int32 id = 1;
+  int32 orderId = 2;
+  string name = 3;
+  PaymentStatus status = 4;
+}
+
+message ChargePaymentRequest {
+  string name = 1;
+  int32 orderId = 2;
+}
+
+message RefundPaymentRequest {
+  int32 paymentId = 1;
+}
+
+service PaymentService {
+
+  rpc chargePayment (ChargePaymentRequest) returns (PaymentResponse) {}
+
+  rpc refundPayment (RefundPaymentRequest) returns (PaymentResponse) {}
+}

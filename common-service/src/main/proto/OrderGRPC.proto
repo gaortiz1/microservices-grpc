@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com.microservice.application.service.order.grpc;
+
+enum OrderStatus {
+  CANCELED = 0;
+  CREATED = 1;
+}
+
+message OrderResponse {
+  int32 id = 1;
+  string name = 2;
+  OrderStatus status = 3;
+}
+
+message CreateOrderRequest {
+  string name = 1;
+}
+
+message CancelOrderRequest {
+  int32 orderId = 1;
+}
+
+service OrderService {
+
+  rpc createOrder (CreateOrderRequest) returns (OrderResponse) {}
+
+  rpc cancelOrder (CancelOrderRequest) returns (OrderResponse) {}
+}
